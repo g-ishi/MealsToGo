@@ -11,7 +11,7 @@ const positionVariant = {
   left: "marginLeft",
   right: "marginRight",
   top: "marginTop",
-  buttom: "marginButtom",
+  bottom: "marginBottom",
 };
 
 const getVariant = (position, size, theme) => {
