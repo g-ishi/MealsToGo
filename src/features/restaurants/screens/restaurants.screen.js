@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { FlatList } from "react-native";
 import styled from "styled-components/native";
 import { Searchbar } from "react-native-paper";
 import { RestaurantInfo } from "../components/restaurant-info.component";
 import { Spacer } from "../../../components/spacer/spacer.component";
 import { SafeAreaContainer } from "../../../components/utils/safe-area.component";
+import { RestaurantsContext } from "../../../services/restaurants/restaurants.context";
 
 // styled内は、CSSでもかけるし、react-nativeのcss記法でも記述できる
 const SearchContainer = styled.View`
@@ -25,33 +26,6 @@ const RestaurantList = styled(FlatList).attrs({
   },
 })``;
 
-const listData = [
-  {
-    name: "1",
-  },
-  {
-    name: "2",
-  },
-  {
-    name: "3",
-  },
-  {
-    name: "4",
-  },
-  {
-    name: "5",
-  },
-  {
-    name: "6",
-  },
-  {
-    name: "7",
-  },
-  {
-    name: "8",
-  },
-];
-
 export const RestaurantsScreen = () => {
   const [query, setQuery] = useState(null);
 
@@ -59,6 +33,9 @@ export const RestaurantsScreen = () => {
     setQuery(searchText);
     console.log(query);
   };
+
+  const { restaurants } = useContext(RestaurantsContext);
+  console.log("screen: ", restaurants);
 
   return (
     <SafeAreaContainer>
@@ -71,7 +48,7 @@ export const RestaurantsScreen = () => {
       </SearchContainer>
       <RestaurantListContainer>
         <RestaurantList
-          data={listData}
+          data={restaurants}
           renderItem={(item) => {
             return (
               <Spacer position="bottom" size="large">
